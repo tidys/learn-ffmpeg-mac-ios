@@ -1,0 +1,1 @@
+cmake -S ./ -B ./proj.xcode -G "Xcode"
