@@ -1,3 +1,5 @@
 /build/
 proj-xcode/
 .DS_Store
+/.vs
+/out/
