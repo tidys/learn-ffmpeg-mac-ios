@@ -1526,7 +1526,7 @@ enum AVPacketSideDataType {
     AV_PKT_DATA_METADATA_UPDATE,
 
     /**
-     * MPEGTS stream ID, this is required to pass the stream ID
+     * MPEGTS stream ID as uint8_t, this is required to pass the stream ID
      * information from the demuxer to the corresponding muxer.
      */
     AV_PKT_DATA_MPEGTS_STREAM_ID,
@@ -1536,7 +1536,17 @@ enum AVPacketSideDataType {
      * should be associated with a video stream and containts data in the form
      * of the AVMasteringDisplayMetadata struct.
      */
-    AV_PKT_DATA_MASTERING_DISPLAY_METADATA
+    AV_PKT_DATA_MASTERING_DISPLAY_METADATA,
+
+    /**
+     * The number of side data elements (in fact a bit more than it).
+     * This is not part of the public API/ABI in the sense that it may
+     * change when new side data types are added.
+     * This must stay the last enum value.
+     * If its value becomes huge, some code using it
+     * needs to be updated as it assumes it to be smaller than other limits.
+     */
+    AV_PKT_DATA_NB
 };
 
 #define AV_PKT_DATA_QUALITY_FACTOR AV_PKT_DATA_QUALITY_STATS //DEPRECATED
@@ -2878,6 +2888,7 @@ typedef struct AVCodecContext {
 #define FF_BUG_DC_CLIP          4096
 #define FF_BUG_MS               8192 ///< Work around various bugs in Microsoft's broken decoders.
 #define FF_BUG_TRUNCATED       16384
+#define FF_BUG_IEDGE           32768
 
     /**
      * strictly follow the standard (MPEG-4, ...).
